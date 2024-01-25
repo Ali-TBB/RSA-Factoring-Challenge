@@ -1,12 +1,29 @@
 #!/usr/bin/python3
 import sys
+import math
 
 def get_factor(num):
-    for i in range(2, num * 0.5):
+    for i in range(2, num):
         if num % i == 0:
             a = num // i
-            print(f"{num}={a}*{i}")
-            return
+            if is_prime(a):
+                print(f"{num}={a}*{i}")
+            return(a)
+
+def is_prime(n):
+    if n <= 1:
+        return False
+    elif n == 2:
+        return True
+    elif n % 2 == 0:
+        return False
+
+    max_divisor = math.isqrt(n) + 1
+    for i in range(3, max_divisor, 2):
+        if n % i == 0:
+            return False
+    return True
+
 def process_file(file_name):
     try:
         with open(file_name, 'r') as file:
